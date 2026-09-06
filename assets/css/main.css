@@ -618,3 +618,14 @@ h1, h2, h3, h4 {
   background: #f2efec; color: var(--ink-soft); border-color: var(--line-input);
 }
 .badge-open.is-closed .dot { background: var(--ink-dim); }
+
+/* Přemostění mezi rychlým formulářem a plánem sálu na samostatné stránce. */
+.form__alt {
+  display: flex; align-items: flex-start; gap: var(--s-3);
+  margin-top: var(--s-5); padding: var(--s-4);
+  background: var(--ember-tint); border: 1px solid rgba(217,119,6,0.3);
+  font-size: var(--t-sm); color: var(--ink-soft);
+}
+.form__alt i { color: var(--ember); margin-top: 4px; flex: none; }
+.form__alt a { color: var(--ember-deep); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+.form__alt a:hover { color: var(--ember); }

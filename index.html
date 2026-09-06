@@ -47,13 +47,13 @@
       <a href="#o-nas">O nás</a>
       <a href="#rezervace">Rezervace</a>
       <a href="#kontakt">Kontakt</a>
-      <a href="#rezervace" class="nav__cta-mobile"><i class="fa-solid fa-utensils" aria-hidden="true"></i> Rezervovat stůl</a>
+      <a href="rezervace.html" class="nav__cta-mobile"><i class="fa-solid fa-utensils" aria-hidden="true"></i> Rezervovat stůl</a>
     </nav>
 
     <div class="nav__actions">
       <a href="tel:+420566620120" class="nav__phone" aria-label="Zavolat na 566 620 120"><i class="fa-solid fa-phone" aria-hidden="true"></i> <span class="label">566 620 120</span></a>
-      <a href="#rezervace" class="btn btn--ember"><i class="fa-solid fa-utensils" aria-hidden="true"></i> Rezervovat stůl</a>
-      <a href="#rezervace" class="btn-icon" aria-label="Moje rezervace"><i class="fa-regular fa-user" aria-hidden="true"></i></a>
+      <a href="rezervace.html" class="btn btn--ember"><i class="fa-solid fa-utensils" aria-hidden="true"></i> Rezervovat stůl</a>
+      <a href="rezervace.html" class="btn-icon" aria-label="Moje rezervace"><i class="fa-regular fa-user" aria-hidden="true"></i></a>
       <button class="nav__burger" type="button" aria-expanded="false" aria-controls="hlavni-navigace" aria-label="Otevřít menu">
         <i class="fa-solid fa-bars" aria-hidden="true"></i>
       </button>
@@ -102,7 +102,7 @@
 
         <div class="hero__cta">
           <a href="#jidelni-listek" class="btn btn--ember">Prohlédnout jídelní lístek <i class="fa-solid fa-utensils" aria-hidden="true"></i></a>
-          <a href="#rezervace" class="btn btn--dark"><i class="fa-solid fa-chair" aria-hidden="true"></i> Rezervovat stůl</a>
+          <a href="rezervace.html" class="btn btn--dark"><i class="fa-solid fa-chair" aria-hidden="true"></i> Rezervovat stůl</a>
         </div>
 
         <dl class="hero__facts">
@@ -329,7 +329,7 @@
         <h3>Máme pro vás také polévky, saláty a dětská menu</h3>
         <p>Každý den pro vás připravujeme čerstvý tažený vývar a vegetariánské speciále s Gran Moravia.</p>
       </div>
-      <a href="#rezervace" class="btn btn--ink">Objednat nebo rezervovat</a>
+      <a href="rezervace.html" class="btn btn--ink">Objednat nebo rezervovat</a>
     </div>
 
   </div>
@@ -370,7 +370,7 @@
       <h2 class="h-section" style="margin-top:var(--s-3)">Rezervace stolu</h2>
       <p class="lead" style="margin-top:var(--s-3)">Plánujete rodinnou oslavu, posezení s přáteli nebo firemní večeři? Vyplňte formulář níže, rezervaci vám potvrdíme formou SMS nebo telefonicky.</p>
 
-      <form class="form" id="formular-rezervace" novalidate>
+      <form class="form" id="formular-rychla-rezervace" novalidate>
         <div class="form__row form__row--2">
           <p class="field">
             <label for="jmeno">Jméno a příjmení <span class="req" aria-hidden="true">*</span></label>
@@ -421,8 +421,13 @@
           <button type="submit" class="btn btn--ember">Odeslat rezervaci <i class="fa-regular fa-circle-check" aria-hidden="true"></i></button>
         </div>
 
-        <p class="form__status" id="stav-rezervace" role="status" hidden></p>
+        <p class="form__status" id="stav-rychle-rezervace" role="status" hidden></p>
       </form>
+
+      <p class="form__alt">
+        <i class="fa-solid fa-chair" aria-hidden="true"></i>
+        <span>Chcete si vybrat konkrétní stůl? <a href="rezervace.html">Otevřete plán sálu a zahrádky</a> a uvidíte, co je na váš termín volné.</span>
+      </p>
     </div>
 
     <div>

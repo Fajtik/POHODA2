@@ -112,8 +112,8 @@
   .topbar__inner { flex-direction: column; align-items: flex-start; gap: var(--s-2); }
   .topbar__right { flex-wrap: wrap; }
 
-  /* V liště zůstane jen volání a menu — CTA je uvnitř rozbaleného menu. */
-  .nav__actions .btn--ember,
+  /* V liště zůstane jen volání a menu — ostatní akce jsou uvnitř menu. */
+  .nav__actions .btn,
   .btn-icon { display: none; }
   .nav__actions { gap: var(--s-2); }
   .nav__phone {
@@ -170,11 +170,52 @@
 }
 
 /* ---------------------------------------------------------------
+   REZERVACE — souhrn se přesouvá pod kroky, plán zůstává čitelný
+   --------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .rez-grid { grid-template-columns: minmax(0, 1fr); }
+  .recap__inner { position: static; }
+  .recap__list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 var(--s-5); }
+  .recap__row + .recap__row { border-top: none; }
+  .recap__row:nth-child(n + 3) { border-top: 1px solid var(--line-light); }
+}
+
+@media (max-width: 760px) {
+  .steps { grid-template-columns: 1fr 1fr; }
+  .steps__item:nth-child(odd) { border-left: none; }
+  .steps__item:nth-child(n + 3) { border-top: 1px solid var(--line-dark); }
+
+  .zones { grid-template-columns: 1fr; }
+  .done__recap { grid-template-columns: 1fr; }
+  .recap__list { grid-template-columns: 1fr; }
+  .recap__row + .recap__row { border-top: 1px solid var(--line-light); }
+
+  .step__foot { flex-direction: column-reverse; align-items: stretch; }
+  .step__foot .btn { width: 100%; }
+
+  /* Půdorys se na úzké obrazovce neztenčuje k nečitelnosti,
+     ale posouvá do stran. */
+  .plan__stage { overflow-x: auto; }
+  .plan__svg { min-width: 560px; }
+  .plan__hint { display: flex; }
+}
+
+@media (max-width: 480px) {
+  .steps { grid-template-columns: 1fr; }
+  .steps__item { border-left: none !important; }
+  .steps__item + .steps__item { border-top: 1px solid var(--line-dark); }
+  .party__row { flex-wrap: wrap; }
+  .slots__row { grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); }
+  .done__cta .btn { width: 100%; }
+}
+
+/* ---------------------------------------------------------------
    Tisk — jídelní lístek na papír
    --------------------------------------------------------------- */
 @media print {
   .nav, .topbar, .hero__visual, .footer, .chips, .place__map,
-  .form, .lunch__cta, .menu__note .btn, .skip-link { display: none !important; }
+  .form, .lunch__cta, .menu__note .btn, .skip-link,
+  .steps, .recap, .step__foot, .zones { display: none !important; }
   body { background: #fff; color: #000; }
   .section, .hero { padding-block: 1rem; background: #fff !important; color: #000 !important; }
   .dishes { grid-template-columns: 1fr 1fr; }

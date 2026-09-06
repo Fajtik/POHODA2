@@ -38,6 +38,13 @@
   --open:        #15803d;   /* dnes otevřeno */
   --open-tint:   #e8f3ec;
 
+  /* ---------- Stavy stolů v plánu sálu ---------- */
+  --free:        #6b9c65;   /* volný stůl — mech Vysočiny */
+  --free-fill:   rgba(107,156,101,0.22);
+  --free-hover:  rgba(107,156,101,0.4);
+  --taken:       #57504a;   /* stůl už někdo drží */
+  --taken-fill:  #241f1c;
+
   /* ---------- Typografie ---------- */
   --font-display: 'Vollkorn', Georgia, 'Times New Roman', serif;
   --font-text:    'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rezervace stolu — Pohoda 2.0</title>
+<meta name="description" content="Rezervujte si stůl v restauraci Pohoda 2.0 ve Žďáru nad Sázavou. Vyberte si datum, čas i konkrétní stůl v sále nebo na zahrádce.">
+<meta name="theme-color" content="#1c1917">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231c1917'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' font-weight='700' fill='%23d97706' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Vollkorn:ital,wght@0,500;0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/rezervace.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+<a class="skip-link" href="#krokovani">Přeskočit na rezervaci</a>
+
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a href="index.html" class="brand" aria-label="Pohoda 2.0, zpět na úvod">
+      <span class="brand__mark" aria-hidden="true"><i class="fa-solid fa-fire"></i></span>
+      <span>
+        <span class="brand__name">Pohoda 2.0</span>
+        <span class="brand__sub">Restaurace</span>
+      </span>
+    </a>
+
+    <nav class="nav__links" id="hlavni-navigace" aria-label="Hlavní navigace">
+      <a href="index.html#denni-menu">Denní menu</a>
+      <a href="index.html#jidelni-listek">Jídelní lístek</a>
+      <a href="index.html#speciality">Speciality z grilu</a>
+      <a href="index.html#o-nas">O nás</a>
+      <a href="rezervace.html" class="is-current">Rezervace</a>
+      <a href="index.html#kontakt">Kontakt</a>
+    </nav>
+
+    <div class="nav__actions">
+      <a href="tel:+420566620120" class="nav__phone" aria-label="Zavolat na 566 620 120"><i class="fa-solid fa-phone" aria-hidden="true"></i> <span class="label">566 620 120</span></a>
+      <a href="index.html" class="btn btn--dark"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Zpět na web</a>
+      <button class="nav__burger" type="button" aria-expanded="false" aria-controls="hlavni-navigace" aria-label="Otevřít menu">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     HLAVIČKA REZERVACE + KROKOVNÍK
+     ============================================================ -->
+<section class="rez-head" id="krokovani">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--boxed"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i> Rezervace stolu</p>
+    <h1 class="rez-head__title">Vyberte si termín i místo, kde chcete sedět</h1>
+    <p class="rez-head__lead">Stůl vám držíme 20 minut po sjednaném čase. Pro skupiny nad 8 osob nebo celý salonek nám raději zavolejte.</p>
+
+    <ol class="steps" aria-label="Průběh rezervace">
+      <li class="steps__item is-active" data-step-nav="1">
+        <span class="steps__num">1</span>
+        <span class="steps__label">Termín<small>Datum a počet osob</small></span>
+      </li>
+      <li class="steps__item" data-step-nav="2">
+        <span class="steps__num">2</span>
+        <span class="steps__label">Čas<small>Volné hodiny</small></span>
+      </li>
+      <li class="steps__item" data-step-nav="3">
+        <span class="steps__num">3</span>
+        <span class="steps__label">Stůl<small>Plán sálu</small></span>
+      </li>
+      <li class="steps__item" data-step-nav="4">
+        <span class="steps__num">4</span>
+        <span class="steps__label">Kontakt<small>Potvrzení</small></span>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<main class="section section--warm rez-main">
+  <div class="wrap rez-grid">
+
+    <!-- ==========================================================
+         SLOUPEC S KROKY
+         ========================================================== -->
+    <div class="rez-flow">
+
+      <!-- KROK 1 — termín -------------------------------------- -->
+      <section class="step panel" data-step="1" aria-labelledby="nadpis-krok-1">
+        <h2 class="step__title" id="nadpis-krok-1">Kdy k nám dorazíte?</h2>
+        <p class="step__hint">Barva u dne říká, jak plno u nás ten večer je.</p>
+
+        <div class="cal">
+          <div class="cal__bar">
+            <button class="cal__nav" type="button" data-cal-prev aria-label="Předchozí měsíc"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+            <h3 class="cal__month" data-cal-month aria-live="polite">—</h3>
+            <button class="cal__nav" type="button" data-cal-next aria-label="Následující měsíc"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+          </div>
+          <div class="cal__dow" aria-hidden="true">
+            <span>Po</span><span>Út</span><span>St</span><span>Čt</span><span>Pá</span><span>So</span><span>Ne</span>
+          </div>
+          <div class="cal__grid" data-cal-grid role="group" aria-label="Výběr data"></div>
+          <ul class="cal__legend">
+            <li><span class="dot dot--free" aria-hidden="true"></span> Volno</li>
+            <li><span class="dot dot--busy" aria-hidden="true"></span> Poslední stoly</li>
+            <li><span class="dot dot--full" aria-hidden="true"></span> Obsazeno</li>
+          </ul>
+          <p class="cal__note">
+            <i class="fa-regular fa-moon" aria-hidden="true"></i>
+            Na večeři vaříme od středy do soboty. V pondělí, úterý a neděli zavíráme v 16:00, dá se tedy přijít na oběd.
+          </p>
+        </div>
+
+        <fieldset class="party">
+          <legend>Kolik vás bude?</legend>
+          <div class="party__row" data-party>
+            <button class="party__btn" type="button" data-people="2">2</button>
+            <button class="party__btn is-selected" type="button" data-people="4">4</button>
+            <button class="party__btn" type="button" data-people="6">6</button>
+            <button class="party__btn" type="button" data-people="8">8</button>
+          </div>
+          <p class="party__note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Devět a více hostů nebo celý salonek domluvíme telefonicky na <a href="tel:+420566620120">566 620 120</a>.</p>
+        </fieldset>
+
+        <div class="step__foot">
+          <span></span>
+          <button class="btn btn--ember" type="button" data-next="2">Pokračovat na výběr času</button>
+        </div>
+      </section>
+
+      <!-- KROK 2 — čas ----------------------------------------- -->
+      <section class="step panel" data-step="2" hidden aria-labelledby="nadpis-krok-2">
+        <h2 class="step__title" id="nadpis-krok-2">V kolik si sednete?</h2>
+        <p class="step__hint">Obsazené časy necháváme vidět, ať víte, kdy je u nás nabito.</p>
+
+        <div class="slots" data-slots-obed>
+          <h3 class="slots__title"><i class="fa-solid fa-sun" aria-hidden="true"></i> Oběd</h3>
+          <div class="slots__row" data-slots="obed" role="group" aria-label="Časy oběda"></div>
+        </div>
+
+        <div class="slots" data-slots-vecere>
+          <h3 class="slots__title"><i class="fa-solid fa-moon" aria-hidden="true"></i> Večer</h3>
+          <div class="slots__row" data-slots="vecer" role="group" aria-label="Časy večeře"></div>
+        </div>
+
+        <p class="slots__empty" data-slots-empty hidden></p>
+
+        <div class="step__foot">
+          <button class="btn btn--ghost" type="button" data-back="1"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Zpět na termín</button>
+          <button class="btn btn--ember" type="button" data-next="3">Pokračovat na výběr stolu</button>
+        </div>
+      </section>
+
+      <!-- KROK 3 — stůl ---------------------------------------- -->
+      <section class="step" data-step="3" hidden aria-labelledby="nadpis-krok-3">
+        <div class="panel">
+          <h2 class="step__title" id="nadpis-krok-3">Kde chcete sedět?</h2>
+          <p class="step__hint">Klikněte na stůl v plánu. Šedé stoly už na váš čas někdo drží.</p>
+
+          <div class="zones" role="tablist" aria-label="Části podniku">
+            <button class="zone" type="button" role="tab" aria-selected="true" data-zone="sal">
+              <i class="fa-solid fa-utensils" aria-hidden="true"></i> Vnitřní sál
+              <small>10 stolů · 40 míst</small>
+            </button>
+            <button class="zone" type="button" role="tab" aria-selected="false" data-zone="zahradka">
+              <i class="fa-solid fa-tree" aria-hidden="true"></i> Zahrádka
+              <small>4 stoly · 18 míst · gril</small>
+            </button>
+          </div>
+        </div>
+
+        <!-- Plán sálu je tmavý blok — stejný jazyk jako polední menu -->
+        <div class="plan">
+          <div class="plan__head">
+            <h3>Plán podniku</h3>
+            <p class="plan__when" data-plan-when>—</p>
+          </div>
+
+          <p class="plan__hint"><i class="fa-solid fa-arrows-left-right" aria-hidden="true"></i> Plánem můžete posunout do stran.</p>
+
+          <div class="plan__stage">
+            <svg class="plan__svg" data-plan="sal" viewBox="0 0 760 470" role="group" aria-label="Plán vnitřního sálu">
+              <!-- obvodové zdi -->
+              <rect class="wall" x="16" y="16" width="728" height="438"/>
+
+              <!-- okna na severní stěně -->
+              <g class="window">
+                <line x1="80"  y1="16" x2="220" y2="16"/>
+                <line x1="270" y1="16" x2="410" y2="16"/>
+                <line x1="460" y1="16" x2="600" y2="16"/>
+              </g>
+              <text class="plan-note" x="340" y="46">okna do ulice</text>
+
+              <!-- výčep -->
+              <rect class="fixture" x="596" y="150" width="148" height="120"/>
+              <text class="fixture-label" x="670" y="205">VÝČEP</text>
+              <text class="fixture-label fixture-label--sub" x="670" y="226">Budvar · Pardál</text>
+
+              <!-- otevřený gril -->
+              <rect class="fixture fixture--fire" x="16" y="300" width="126" height="110"/>
+              <text class="fixture-label" x="79" y="350">GRIL</text>
+              <text class="fixture-label fixture-label--sub" x="79" y="371">otevřený</text>
+
+              <!-- vchod -->
+              <g class="door">
+                <line x1="330" y1="454" x2="440" y2="454"/>
+              </g>
+              <text class="plan-note" x="385" y="440">vchod</text>
+
+              <!-- stoly doplní skript -->
+              <g data-tables></g>
+            </svg>
+
+            <svg class="plan__svg" data-plan="zahradka" viewBox="0 0 760 470" role="group" aria-label="Plán zahrádky" hidden>
+              <rect class="wall wall--soft" x="16" y="16" width="728" height="438"/>
+
+              <!-- pergola -->
+              <rect class="fixture" x="458" y="34" width="272" height="186"/>
+              <text class="fixture-label fixture-label--left" x="476" y="60">PERGOLA</text>
+              <text class="fixture-label fixture-label--sub fixture-label--left" x="476" y="79">zastřešeno</text>
+
+              <!-- zahradní gril -->
+              <rect class="fixture fixture--fire" x="34" y="34" width="132" height="104"/>
+              <text class="fixture-label" x="100" y="80">GRIL</text>
+              <text class="fixture-label fixture-label--sub" x="100" y="101">zahradní</text>
+
+              <!-- zeleň podél plotu -->
+              <g class="green">
+                <circle cx="62" cy="212" r="26"/>
+                <circle cx="700" cy="304" r="22"/>
+                <circle cx="686" cy="392" r="30"/>
+              </g>
+
+              <!-- vstup ze sálu -->
+              <g class="door">
+                <line x1="300" y1="454" x2="410" y2="454"/>
+              </g>
+              <text class="plan-note" x="355" y="440">vstup ze sálu</text>
+
+              <g data-tables></g>
+            </svg>
+          </div>
+
+          <ul class="plan__legend">
+            <li><span class="key key--free" aria-hidden="true"></span> Volný</li>
+            <li><span class="key key--taken" aria-hidden="true"></span> Obsazený</li>
+            <li><span class="key key--small" aria-hidden="true"></span> Malý pro váš počet</li>
+            <li><span class="key key--picked" aria-hidden="true"></span> Váš výběr</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <div class="step__foot">
+            <button class="btn btn--ghost" type="button" data-back="2"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Zpět na čas</button>
+            <button class="btn btn--ember" type="button" data-next="4">Pokračovat na kontakt</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- KROK 4 — kontakt ------------------------------------- -->
+      <section class="step panel" data-step="4" hidden aria-labelledby="nadpis-krok-4">
+        <h2 class="step__title" id="nadpis-krok-4">Kam vám pošleme potvrzení?</h2>
+        <p class="step__hint">Rezervaci potvrdíme SMS. Pokud by se něco změnilo, ozveme se telefonicky.</p>
+
+        <form class="form" id="formular-rezervace" novalidate>
+          <div class="form__row form__row--2">
+            <p class="field">
+              <label for="jmeno">Jméno a příjmení <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="jmeno" name="jmeno" placeholder="Jan Novák" autocomplete="name" required>
+            </p>
+            <p class="field">
+              <label for="telefon">Telefonní číslo <span class="req" aria-hidden="true">*</span></label>
+              <input type="tel" id="telefon" name="telefon" placeholder="+420 777 000 000" autocomplete="tel" required>
+            </p>
+          </div>
+
+          <p class="field">
+            <label for="email">E-mail <span class="volitelne">nepovinné</span></label>
+            <input type="email" id="email" name="email" placeholder="vas@email.cz" autocomplete="email">
+          </p>
+
+          <fieldset class="occasion">
+            <legend>Jde o zvláštní příležitost?</legend>
+            <div class="occasion__row" data-occasion>
+              <button class="tagbtn is-selected" type="button" data-occasion-value="">Běžná návštěva</button>
+              <button class="tagbtn" type="button" data-occasion-value="Narozeniny">Narozeniny</button>
+              <button class="tagbtn" type="button" data-occasion-value="Oslava">Rodinná oslava</button>
+              <button class="tagbtn" type="button" data-occasion-value="Firemní akce">Firemní akce</button>
+            </div>
+          </fieldset>
+
+          <p class="field">
+            <label for="poznamka">Poznámka pro kuchyni a obsluhu</label>
+            <textarea id="poznamka" name="poznamka" placeholder="Např. dětská židlička, bezlepkové jídlo, chceme Tomahawk – připravte ho prosím."></textarea>
+          </p>
+
+          <div class="step__foot">
+            <button class="btn btn--ghost" type="button" data-back="3"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Zpět na výběr stolu</button>
+            <button class="btn btn--ember" type="submit">Závazně rezervovat <i class="fa-regular fa-circle-check" aria-hidden="true"></i></button>
+          </div>
+
+          <p class="form__status" id="stav-rezervace" role="status" hidden></p>
+        </form>
+      </section>
+
+      <!-- POTVRZENÍ -------------------------------------------- -->
+      <section class="step done" data-step="5" hidden aria-labelledby="nadpis-hotovo">
+        <div class="done__mark" aria-hidden="true"><i class="fa-solid fa-check"></i></div>
+        <h2 class="done__title" id="nadpis-hotovo">Stůl je váš. Těšíme se!</h2>
+        <p class="done__lead">Potvrzení jsme odeslali SMS. Stůl držíme 20 minut po sjednaném čase — kdyby se vám cokoliv posunulo, stačí zavolat.</p>
+
+        <dl class="done__recap" data-done-recap></dl>
+
+        <p class="done__code">Číslo rezervace <strong data-done-code>—</strong></p>
+
+        <div class="done__cta">
+          <a href="index.html#jidelni-listek" class="btn btn--ink">Prohlédnout jídelní lístek</a>
+          <a href="tel:+420566620120" class="btn btn--ghost"><i class="fa-solid fa-phone" aria-hidden="true"></i> Zavolat do restaurace</a>
+          <button class="btn btn--ghost" type="button" data-restart>Nová rezervace</button>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ==========================================================
+         SOUHRN
+         ========================================================== -->
+    <aside class="recap" aria-label="Souhrn rezervace">
+      <div class="recap__inner">
+        <h2 class="recap__title">Vaše rezervace</h2>
+        <dl class="recap__list">
+          <div class="recap__row" data-recap="datum">
+            <dt><i class="fa-regular fa-calendar" aria-hidden="true"></i> Datum</dt>
+            <dd>—</dd>
+          </div>
+          <div class="recap__row" data-recap="osob">
+            <dt><i class="fa-solid fa-user-group" aria-hidden="true"></i> Počet osob</dt>
+            <dd>—</dd>
+          </div>
+          <div class="recap__row" data-recap="cas">
+            <dt><i class="fa-regular fa-clock" aria-hidden="true"></i> Čas</dt>
+            <dd>—</dd>
+          </div>
+          <div class="recap__row" data-recap="stul">
+            <dt><i class="fa-solid fa-chair" aria-hidden="true"></i> Stůl</dt>
+            <dd>—</dd>
+          </div>
+        </dl>
+
+        <p class="recap__note">
+          <i class="fa-solid fa-mug-hot" aria-hidden="true"></i>
+          Gril běží po celou otevírací dobu, na steak si tedy můžete přijít i na oběd.
+        </p>
+
+        <p class="recap__demo">
+          <i class="fa-solid fa-flask" aria-hidden="true"></i>
+          Ukázková verze — obsazenost je smyšlená a rezervace se nikam neodesílá.
+        </p>
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__bottom" style="margin-top:0;padding-top:0;border-top:none">
+      <p>© 2026 Restaurace Pohoda 2.0, Strojírenská 396/4, Žďár nad Sázavou</p>
+      <nav aria-label="Doplňkové odkazy">
+        <a href="index.html">Úvod</a>
+        <a href="index.html#jidelni-listek">Jídelní lístek</a>
+        <a href="index.html#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/rezervace.js"></script>
+</body>
+</html>

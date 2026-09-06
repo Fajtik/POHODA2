@@ -150,8 +150,10 @@
   /* -----------------------------------------------------------
      Rezervační formulář — demo bez backendu
      ----------------------------------------------------------- */
-  (function rezervace() {
-    var form = $('#formular-rezervace');
+  /* Krátký formulář na úvodní stránce. Čtyřkrokový flow na rezervace.html
+     má vlastní skript a tenhle se ho nedotýká. */
+  (function rychlaRezervace() {
+    var form = $('#formular-rychla-rezervace');
     if (!form) return;
 
     /* Předvyplníme zítřejší datum, ať je formulář hned použitelný. */
@@ -163,7 +165,7 @@
       datum.min = new Date().toISOString().slice(0, 10);
     }
 
-    var stav = $('#stav-rezervace');
+    var stav = $('#stav-rychle-rezervace');
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
