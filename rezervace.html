@@ -185,63 +185,10 @@
 
           <div class="plan__stage">
             <svg class="plan__svg" data-plan="sal" viewBox="0 0 760 470" role="group" aria-label="Plán vnitřního sálu">
-              <!-- obvodové zdi -->
-              <rect class="wall" x="16" y="16" width="728" height="438"/>
-
-              <!-- okna na severní stěně -->
-              <g class="window">
-                <line x1="80"  y1="16" x2="220" y2="16"/>
-                <line x1="270" y1="16" x2="410" y2="16"/>
-                <line x1="460" y1="16" x2="600" y2="16"/>
-              </g>
-              <text class="plan-note" x="340" y="46">okna do ulice</text>
-
-              <!-- výčep -->
-              <rect class="fixture" x="596" y="150" width="148" height="120"/>
-              <text class="fixture-label" x="670" y="205">VÝČEP</text>
-              <text class="fixture-label fixture-label--sub" x="670" y="226">Budvar · Pardál</text>
-
-              <!-- otevřený gril -->
-              <rect class="fixture fixture--fire" x="16" y="300" width="126" height="110"/>
-              <text class="fixture-label" x="79" y="350">GRIL</text>
-              <text class="fixture-label fixture-label--sub" x="79" y="371">otevřený</text>
-
-              <!-- vchod -->
-              <g class="door">
-                <line x1="330" y1="454" x2="440" y2="454"/>
-              </g>
-              <text class="plan-note" x="385" y="440">vchod</text>
-
-              <!-- stoly doplní skript -->
               <g data-tables></g>
             </svg>
 
             <svg class="plan__svg" data-plan="zahradka" viewBox="0 0 760 470" role="group" aria-label="Plán zahrádky" hidden>
-              <rect class="wall wall--soft" x="16" y="16" width="728" height="438"/>
-
-              <!-- pergola -->
-              <rect class="fixture" x="458" y="34" width="272" height="186"/>
-              <text class="fixture-label fixture-label--left" x="476" y="60">PERGOLA</text>
-              <text class="fixture-label fixture-label--sub fixture-label--left" x="476" y="79">zastřešeno</text>
-
-              <!-- zahradní gril -->
-              <rect class="fixture fixture--fire" x="34" y="34" width="132" height="104"/>
-              <text class="fixture-label" x="100" y="80">GRIL</text>
-              <text class="fixture-label fixture-label--sub" x="100" y="101">zahradní</text>
-
-              <!-- zeleň podél plotu -->
-              <g class="green">
-                <circle cx="62" cy="212" r="26"/>
-                <circle cx="700" cy="304" r="22"/>
-                <circle cx="686" cy="392" r="30"/>
-              </g>
-
-              <!-- vstup ze sálu -->
-              <g class="door">
-                <line x1="300" y1="454" x2="410" y2="454"/>
-              </g>
-              <text class="plan-note" x="355" y="440">vstup ze sálu</text>
-
               <g data-tables></g>
             </svg>
           </div>
@@ -375,11 +322,13 @@
         <a href="index.html">Úvod</a>
         <a href="index.html#jidelni-listek">Jídelní lístek</a>
         <a href="index.html#kontakt">Kontakt</a>
+        <a href="admin.html">Provozní panel</a>
       </nav>
     </div>
   </div>
 </footer>
 
+<script src="assets/js/podnik.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/rezervace.js"></script>
 </body>

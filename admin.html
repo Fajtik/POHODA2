@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Provozní panel — Pohoda 2.0</title>
+<meta name="description" content="Přehled rezervací, obsazenosti stolů a příchodů hostů pro obsluhu restaurace Pohoda 2.0.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#100f0d">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23100f0d'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='19' font-weight='700' fill='%23d97706' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Vollkorn:ital,wght@0,500;0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/rezervace.css">
+<link rel="stylesheet" href="assets/css/admin.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body class="admin">
+
+<a class="skip-link" href="#prehled">Přeskočit na přehled</a>
+
+<!-- ============================================================
+     LIŠTA PANELU
+     ============================================================ -->
+<header class="abar">
+  <div class="wrap abar__inner">
+    <span class="brand">
+      <span class="brand__mark" aria-hidden="true"><i class="fa-solid fa-fire"></i></span>
+      <span>
+        <span class="brand__name">Pohoda 2.0</span>
+        <span class="brand__sub">Provozní panel</span>
+      </span>
+    </span>
+
+    <p class="abar__demo">
+      <i class="fa-solid fa-flask" aria-hidden="true"></i>
+      Ukázková data — jména hostů i rezervace jsou smyšlené
+    </p>
+
+    <div class="abar__actions">
+      <span class="abar__clock" data-clock aria-live="off">—</span>
+      <a href="index.html" class="btn btn--dark btn--sm"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Zpět na web</a>
+    </div>
+  </div>
+</header>
+
+<main id="prehled">
+
+<!-- ============================================================
+     DEN A SOUHRN
+     ============================================================ -->
+<section class="aday">
+  <div class="wrap">
+    <div class="aday__nav">
+      <button class="aday__step" type="button" data-day-prev aria-label="Předchozí den">
+        <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+      </button>
+
+      <div class="aday__label">
+        <h1 data-day-title>—</h1>
+        <p data-day-sub>—</p>
+      </div>
+
+      <button class="aday__step" type="button" data-day-next aria-label="Následující den">
+        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      </button>
+
+      <button class="btn btn--dark btn--sm" type="button" data-day-today>Dnes</button>
+      <input class="aday__picker" type="date" data-day-picker aria-label="Vybrat datum">
+    </div>
+
+    <dl class="cards">
+      <div class="card">
+        <dt>Rezervací</dt>
+        <dd data-stat="rezervaci">—</dd>
+        <p data-stat-note="rezervaci">—</p>
+      </div>
+      <div class="card">
+        <dt>Hostů celkem</dt>
+        <dd data-stat="hostu">—</dd>
+        <p data-stat-note="hostu">—</p>
+      </div>
+      <div class="card">
+        <dt>Špička</dt>
+        <dd data-stat="spicka">—</dd>
+        <p data-stat-note="spicka">—</p>
+      </div>
+      <div class="card card--action">
+        <dt>Čeká na potvrzení</dt>
+        <dd data-stat="ceka">—</dd>
+        <p data-stat-note="ceka">—</p>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<div class="wrap agrid">
+
+  <!-- ==========================================================
+       ČASOVÁ OSA
+       ========================================================== -->
+  <section class="apanel timeline" aria-labelledby="nadpis-osa">
+    <div class="apanel__head">
+      <h2 id="nadpis-osa">Průběh dne po stolech</h2>
+      <p class="apanel__sub" data-timeline-range>—</p>
+    </div>
+
+    <div class="timeline__scroll">
+      <div class="timeline__inner" data-timeline>
+        <div class="timeline__hours" data-timeline-hours aria-hidden="true"></div>
+        <div class="timeline__rows" data-timeline-rows></div>
+      </div>
+    </div>
+
+    <p class="timeline__empty" data-timeline-empty hidden>Na tento den zatím nemáme žádnou rezervaci.</p>
+
+    <ul class="alegend">
+      <li><span class="key key--ceka" aria-hidden="true"></span> Čeká na potvrzení</li>
+      <li><span class="key key--potvrzeno" aria-hidden="true"></span> Potvrzeno</li>
+      <li><span class="key key--dorazili" aria-hidden="true"></span> Hosté u stolu</li>
+      <li><span class="key key--odesli" aria-hidden="true"></span> Odešli</li>
+      <li><span class="key key--nedorazili" aria-hidden="true"></span> Nedorazili</li>
+    </ul>
+  </section>
+
+  <!-- ==========================================================
+       PLÁN V ČASE
+       ========================================================== -->
+  <section class="apanel aplan" aria-labelledby="nadpis-plan">
+    <div class="apanel__head">
+      <h2 id="nadpis-plan">Obsazenost v čase</h2>
+      <p class="apanel__sub" data-plan-time>—</p>
+    </div>
+
+    <label class="aslider">
+      <span class="aslider__label">Posuňte časem a uvidíte, jak se sál plní</span>
+      <input type="range" data-time-slider min="600" max="1320" step="15" value="1140"
+             aria-label="Čas dne">
+      <span class="aslider__ticks" aria-hidden="true">
+        <span>10:00</span><span>14:00</span><span>18:00</span><span>22:00</span>
+      </span>
+    </label>
+
+    <div class="azones" role="tablist" aria-label="Části podniku">
+      <button class="azone" type="button" role="tab" aria-selected="true" data-azone="sal">Vnitřní sál</button>
+      <button class="azone" type="button" role="tab" aria-selected="false" data-azone="zahradka">Zahrádka</button>
+    </div>
+
+    <div class="plan__stage">
+      <svg class="plan__svg" data-plan="sal" viewBox="0 0 760 470" role="group" aria-label="Plán vnitřního sálu">
+        <g data-tables></g>
+      </svg>
+      <svg class="plan__svg" data-plan="zahradka" viewBox="0 0 760 470" role="group" aria-label="Plán zahrádky" hidden>
+        <g data-tables></g>
+      </svg>
+    </div>
+
+    <p class="aplan__note" data-plan-note>—</p>
+  </section>
+
+</div>
+
+<!-- ============================================================
+     SEZNAM REZERVACÍ
+     ============================================================ -->
+<section class="wrap alist" aria-labelledby="nadpis-seznam">
+  <div class="apanel">
+    <div class="apanel__head apanel__head--wrap">
+      <h2 id="nadpis-seznam">Rezervace dne</h2>
+
+      <div class="afilters" role="group" aria-label="Filtr podle stavu">
+        <button class="chip" type="button" data-filter-stav="vse" aria-pressed="true">Vše</button>
+        <button class="chip" type="button" data-filter-stav="ceka" aria-pressed="false">Čeká</button>
+        <button class="chip" type="button" data-filter-stav="potvrzeno" aria-pressed="false">Potvrzeno</button>
+        <button class="chip" type="button" data-filter-stav="dorazili" aria-pressed="false">U stolu</button>
+        <button class="chip" type="button" data-filter-stav="nedorazili" aria-pressed="false">Nedorazili</button>
+      </div>
+    </div>
+
+    <div class="atable__scroll">
+      <table class="atable">
+        <caption class="skip-link">Seznam rezervací na vybraný den</caption>
+        <thead>
+          <tr>
+            <th scope="col">Čas</th>
+            <th scope="col">Stůl</th>
+            <th scope="col">Host</th>
+            <th scope="col">Osob</th>
+            <th scope="col">Zdroj</th>
+            <th scope="col">Stav</th>
+            <th scope="col"><span class="skip-link">Akce</span></th>
+          </tr>
+        </thead>
+        <tbody data-list></tbody>
+      </table>
+    </div>
+
+    <p class="atable__empty" data-list-empty hidden>Žádná rezervace v tomto filtru.</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     DETAIL REZERVACE
+     ============================================================ -->
+<aside class="adetail" data-detail-panel hidden aria-labelledby="nadpis-detail">
+  <div class="adetail__panel" role="dialog" aria-modal="true" aria-labelledby="nadpis-detail">
+    <div class="adetail__head">
+      <h2 id="nadpis-detail" data-detail-host>—</h2>
+      <button class="adetail__close" type="button" data-detail-close aria-label="Zavřít detail">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <dl class="adetail__list" data-detail-list></dl>
+
+    <div class="adetail__actions" data-detail-actions></div>
+  </div>
+</aside>
+
+<script src="assets/js/podnik.js"></script>
+<script src="assets/js/admin.js"></script>
+</body>
+</html>

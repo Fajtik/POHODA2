@@ -1,0 +1,365 @@
+/* =============================================================
+   POHODA 2.0 — provozní panel
+   Tmavé prostředí: běží celý večer u výčepu, kde svítí jen lampy.
+   Navazuje na tokens.css, main.css a rezervace.css (plán sálu).
+   ============================================================= */
+
+.admin {
+  background: var(--coal);
+  color: var(--foam);
+}
+
+/* Stavy rezervace mají vlastní barvy — používá je osa, plán i seznam. */
+:root {
+  --st-ceka:       #e0a326;
+  --st-potvrzeno:  #6b9c65;
+  --st-dorazili:   #d97706;
+  --st-odesli:     #57504a;
+  --st-nedorazili: #b4453a;
+}
+
+/* ---------------------------------------------------------------
+   1. LIŠTA PANELU
+   --------------------------------------------------------------- */
+.abar {
+  position: sticky; top: 0; z-index: 90;
+  background: var(--char);
+  border-bottom: 1px solid var(--line-dark);
+}
+.abar__inner {
+  display: flex; align-items: center; gap: var(--s-5);
+  min-height: 64px; padding-block: var(--s-3);
+}
+.abar .brand__name { color: var(--foam); font-size: 1.1rem; }
+.abar .brand__sub { color: var(--ember); }
+
+.abar__demo {
+  display: flex; align-items: center; gap: var(--s-2);
+  margin-inline: auto;
+  padding: var(--s-2) var(--s-3);
+  background: rgba(217,119,6,0.12); border: 1px solid rgba(217,119,6,0.32);
+  color: var(--ember); font-size: var(--t-xs); font-weight: 700;
+}
+
+.abar__actions { display: flex; align-items: center; gap: var(--s-4); flex: none; }
+.abar__clock {
+  font-size: 1.125rem; font-weight: 800; color: var(--foam);
+  font-variant-numeric: tabular-nums; letter-spacing: 0.02em;
+}
+
+/* ---------------------------------------------------------------
+   2. DEN A SOUHRNNÉ KARTY
+   --------------------------------------------------------------- */
+.aday { padding-block: clamp(1.25rem, 0.75rem + 1.6vw, 2rem) var(--s-5); }
+
+.aday__nav { display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap; }
+.aday__step {
+  width: 40px; height: 40px; flex: none;
+  display: grid; place-items: center;
+  border: 1px solid var(--line-dark); color: var(--stone);
+  transition: border-color var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+.aday__step:hover { border-color: var(--ember); color: var(--ember); }
+
+.aday__label { margin-right: auto; }
+.aday__label h1 { font-size: var(--t-h2); color: var(--foam); }
+.aday__label p { font-size: var(--t-sm); color: var(--stone-dim); margin-top: 2px; }
+
+.aday__picker {
+  background: var(--char); color: var(--foam);
+  border: 1px solid var(--line-dark);
+  padding: 0.55rem var(--s-3); font-size: var(--t-sm);
+  color-scheme: dark;
+}
+.aday__picker:focus { outline: none; border-color: var(--ember); }
+
+.cards {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-4);
+  margin-top: var(--s-5);
+}
+.card {
+  background: var(--char); border: 1px solid var(--line-dark);
+  padding: var(--s-4) var(--s-5);
+}
+.card dt {
+  font-size: var(--t-xs); font-weight: 800; color: var(--stone-dim);
+  letter-spacing: var(--track-label); text-transform: uppercase;
+}
+.card dd {
+  font-family: var(--font-display); font-size: 2rem; font-weight: 700;
+  color: var(--foam); line-height: 1.1; margin-top: var(--s-2);
+  font-variant-numeric: tabular-nums;
+}
+.card p { font-size: var(--t-xs); color: var(--stone); margin-top: var(--s-1); }
+
+.card--action.is-urgent { border-color: rgba(224,163,38,0.5); background: rgba(224,163,38,0.08); }
+.card--action.is-urgent dd { color: var(--st-ceka); }
+
+/* ---------------------------------------------------------------
+   3. ROZVRŽENÍ PANELŮ
+   --------------------------------------------------------------- */
+.agrid {
+  display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: var(--s-4); align-items: start;
+}
+
+.apanel {
+  background: var(--char); border: 1px solid var(--line-dark);
+  padding: clamp(1rem, 0.6rem + 1.4vw, 1.75rem);
+  min-width: 0;
+}
+.apanel__head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: var(--s-4); margin-bottom: var(--s-4);
+}
+.apanel__head--wrap { flex-wrap: wrap; }
+.apanel__head h2 { font-size: var(--t-h3); color: var(--foam); }
+.apanel__sub { font-size: var(--t-sm); color: var(--ember); font-weight: 700; }
+
+/* ---------------------------------------------------------------
+   4. ČASOVÁ OSA
+   --------------------------------------------------------------- */
+.timeline__scroll { overflow-x: auto; }
+.timeline__inner { min-width: 560px; }
+
+.timeline__hours {
+  position: relative; height: 22px;
+  margin-left: 64px;
+  border-bottom: 1px solid var(--line-dark);
+}
+.timeline__hour {
+  position: absolute; top: 0; transform: translateX(-50%);
+  font-size: var(--t-xs); color: var(--stone-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.timeline__rows { margin-top: var(--s-2); }
+.trow { display: flex; align-items: stretch; gap: var(--s-2); }
+.trow + .trow { margin-top: 3px; }
+
+.trow__label {
+  width: 56px; flex: none;
+  display: flex; flex-direction: column; justify-content: center;
+  padding-right: var(--s-2);
+  border-right: 1px solid var(--line-dark);
+}
+.trow__label strong {
+  font-family: var(--font-display); font-size: 1rem; color: var(--foam); line-height: 1;
+}
+.trow__label span { font-size: 0.625rem; color: var(--stone-dim); }
+
+.trow__track {
+  position: relative; flex: 1; min-height: 40px;
+  background: var(--coal);
+  background-image: repeating-linear-gradient(to right,
+    var(--line-dark) 0 1px, transparent 1px calc(100% / 6));
+}
+
+.tblock {
+  position: absolute; top: 3px; bottom: 3px;
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 1px; padding: 0 var(--s-2);
+  overflow: hidden; text-align: left;
+  border-left: 3px solid;
+  transition: filter var(--fast) var(--ease);
+}
+.tblock:hover { filter: brightness(1.25); }
+.tblock__name {
+  font-size: var(--t-xs); font-weight: 700; color: var(--foam);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.tblock__meta { font-size: 0.625rem; color: var(--stone); font-variant-numeric: tabular-nums; }
+
+.tblock.is-ceka       { background: rgba(224,163,38,0.2);  border-left-color: var(--st-ceka); }
+.tblock.is-potvrzeno  { background: rgba(107,156,101,0.2); border-left-color: var(--st-potvrzeno); }
+.tblock.is-dorazili   { background: rgba(217,119,6,0.28);  border-left-color: var(--st-dorazili); }
+.tblock.is-odesli     { background: rgba(87,80,74,0.28);   border-left-color: var(--st-odesli); }
+.tblock.is-odesli .tblock__name { color: var(--stone); }
+.tblock.is-nedorazili { background: rgba(180,69,58,0.2);   border-left-color: var(--st-nedorazili); }
+.tblock.is-nedorazili .tblock__name { color: var(--stone); text-decoration: line-through; }
+
+.timeline__empty, .atable__empty {
+  margin-top: var(--s-4); padding: var(--s-5);
+  border: 1px dashed var(--line-dark);
+  text-align: center; font-size: var(--t-sm); color: var(--stone-dim);
+}
+
+.alegend {
+  display: flex; flex-wrap: wrap; gap: var(--s-4);
+  margin-top: var(--s-4); font-size: var(--t-xs); color: var(--stone);
+}
+.alegend li { display: flex; align-items: center; gap: var(--s-2); }
+.alegend .key { width: 12px; height: 12px; flex: none; }
+.key--ceka       { background: var(--st-ceka); }
+.key--potvrzeno  { background: var(--st-potvrzeno); }
+.key--dorazili   { background: var(--st-dorazili); }
+.key--odesli     { background: var(--st-odesli); }
+.key--nedorazili { background: var(--st-nedorazili); }
+
+/* ---------------------------------------------------------------
+   5. PLÁN V ČASE
+   --------------------------------------------------------------- */
+.aslider { display: block; margin-bottom: var(--s-4); }
+.aslider__label { display: block; font-size: var(--t-xs); color: var(--stone-dim); margin-bottom: var(--s-2); }
+
+.aslider input[type="range"] {
+  width: 100%; height: 28px;
+  appearance: none; background: none; cursor: pointer;
+}
+.aslider input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px; background: var(--line-dark);
+}
+.aslider input[type="range"]::-moz-range-track { height: 4px; background: var(--line-dark); }
+.aslider input[type="range"]::-webkit-slider-thumb {
+  appearance: none; width: 22px; height: 22px; margin-top: -9px;
+  background: var(--ember); border: 2px solid var(--coal);
+}
+.aslider input[type="range"]::-moz-range-thumb {
+  width: 22px; height: 22px; border: 2px solid var(--coal);
+  background: var(--ember); border-radius: 0;
+}
+.aslider input[type="range"]:focus-visible { outline: 2px solid var(--ember); outline-offset: 4px; }
+
+.aslider__ticks {
+  display: flex; justify-content: space-between;
+  font-size: 0.625rem; color: var(--stone-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.azones { display: flex; gap: var(--s-2); margin-bottom: var(--s-4); }
+.azone {
+  padding: 0.5rem 0.9rem;
+  font-size: var(--t-sm); font-weight: 600;
+  background: var(--coal); border: 1px solid var(--line-dark); color: var(--stone);
+  transition: border-color var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+.azone:hover { border-color: var(--ember); color: var(--ember); }
+.azone[aria-selected="true"] { background: var(--ember); border-color: var(--ember); color: #17120b; }
+
+.aplan__note {
+  margin-top: var(--s-4); padding: var(--s-3);
+  background: var(--coal); border: 1px solid var(--line-dark);
+  font-size: var(--t-sm); color: var(--stone);
+}
+
+/* Stavy stolů v plánu — přebíjejí volnou zelenou z rezervace.css. */
+.admin .plan__svg .table.is-ceka .top       { fill: rgba(224,163,38,0.28);  stroke: var(--st-ceka); }
+.admin .plan__svg .table.is-potvrzeno .top  { fill: rgba(107,156,101,0.28); stroke: var(--st-potvrzeno); }
+.admin .plan__svg .table.is-dorazili .top   { fill: var(--ember);           stroke: var(--ember-hi); }
+.admin .plan__svg .table.is-dorazili .table__id    { fill: #17120b; }
+.admin .plan__svg .table.is-dorazili .table__seats { fill: #4a2f08; }
+.admin .plan__svg .table.is-odesli .top     { fill: rgba(87,80,74,0.3);     stroke: var(--st-odesli); }
+.admin .plan__svg .table.is-nedorazili .top { fill: rgba(180,69,58,0.22);   stroke: var(--st-nedorazili); }
+
+/* Volný stůl v panelu je ztlumený, ne zvýrazněný — pozornost patří obsazeným. */
+.admin .plan__svg .table .top { fill: #1f1b19; stroke: var(--line-dark); }
+.admin .plan__svg .table:not([data-rezervace=""]) { cursor: pointer; }
+.admin .plan__svg .table[data-rezervace=""] { cursor: default; }
+.admin .plan__svg .table[data-rezervace=""]:hover .top { fill: #1f1b19; }
+.admin .plan__svg .table__seats { fill: var(--stone-dim); }
+
+/* ---------------------------------------------------------------
+   6. SEZNAM REZERVACÍ
+   --------------------------------------------------------------- */
+.alist { margin-top: var(--s-4); padding-bottom: clamp(2rem, 1rem + 3vw, 4rem); }
+
+.afilters { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.admin .chip {
+  background: var(--coal); border-color: var(--line-dark); color: var(--stone);
+}
+.admin .chip:hover { border-color: var(--ember); color: var(--ember); }
+.admin .chip[aria-pressed="true"] { background: var(--ember); border-color: var(--ember); color: #17120b; }
+
+.atable__scroll { overflow-x: auto; }
+.atable { width: 100%; border-collapse: collapse; min-width: 720px; }
+.atable th {
+  text-align: left; padding: var(--s-3);
+  font-size: var(--t-xs); font-weight: 800; color: var(--stone-dim);
+  letter-spacing: var(--track-label); text-transform: uppercase;
+  border-bottom: 1px solid var(--line-dark);
+}
+.atable td { padding: var(--s-3); font-size: var(--t-sm); vertical-align: middle; }
+.atable tbody tr { border-bottom: 1px solid var(--line-soft, #241f1c); }
+.atable tbody tr:hover { background: rgba(255,251,235,0.03); }
+
+.acas   { font-weight: 700; color: var(--foam); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.astul  { color: var(--stone); white-space: nowrap; }
+.aosob  { font-variant-numeric: tabular-nums; color: var(--foam); font-weight: 700; }
+.akanal { color: var(--stone-dim); }
+
+.ahost { min-width: 200px; }
+.ahost strong { display: block; color: var(--foam); font-weight: 700; }
+.ahost span { display: block; font-size: var(--t-xs); color: var(--stone-dim); margin-top: 2px; }
+
+.stav {
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  padding: 3px var(--s-2);
+  font-size: var(--t-xs); font-weight: 700; white-space: nowrap;
+  border: 1px solid;
+}
+.stav::before { content: ""; width: 7px; height: 7px; background: currentColor; }
+.stav--ceka       { color: var(--st-ceka);       border-color: rgba(224,163,38,0.45);  background: rgba(224,163,38,0.1); }
+.stav--potvrzeno  { color: var(--st-potvrzeno);  border-color: rgba(107,156,101,0.45); background: rgba(107,156,101,0.1); }
+.stav--dorazili   { color: var(--ember);         border-color: rgba(217,119,6,0.5);    background: rgba(217,119,6,0.12); }
+.stav--odesli     { color: var(--stone-dim);     border-color: var(--line-dark); }
+.stav--nedorazili { color: var(--st-nedorazili); border-color: rgba(180,69,58,0.45);   background: rgba(180,69,58,0.1); }
+
+.aakce { display: flex; gap: var(--s-2); justify-content: flex-end; flex-wrap: wrap; }
+
+.abtn {
+  padding: 0.45rem 0.75rem;
+  font-size: var(--t-xs); font-weight: 700; white-space: nowrap;
+  border: 1px solid transparent;
+  transition: background-color var(--fast) var(--ease), border-color var(--fast) var(--ease),
+              color var(--fast) var(--ease);
+}
+.abtn--ember { background: var(--ember); color: #17120b; }
+.abtn--ember:hover { background: var(--ember-hi); }
+.abtn--ghost { border-color: var(--line-dark); color: var(--stone); }
+.abtn--ghost:hover { border-color: var(--stone-dim); color: var(--foam); }
+.abtn--wide {
+  width: 100%; padding: 0.7rem;
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+  font-size: var(--t-sm);
+}
+
+/* ---------------------------------------------------------------
+   7. DETAIL REZERVACE
+   --------------------------------------------------------------- */
+.adetail {
+  position: fixed; inset: 0; z-index: 120;
+  background: rgba(10,9,8,0.72);
+  display: flex; justify-content: flex-end;
+}
+.adetail__panel {
+  width: min(420px, 100%); height: 100%; overflow-y: auto;
+  background: var(--char); border-left: 1px solid var(--line-dark);
+  padding: var(--s-5);
+}
+.adetail__head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: var(--s-4); padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--line-dark);
+}
+.adetail__head h2 { font-size: var(--t-h3); color: var(--foam); }
+.adetail__close {
+  width: 40px; height: 40px; flex: none;
+  display: grid; place-items: center;
+  border: 1px solid var(--line-dark); color: var(--stone);
+}
+.adetail__close:hover { border-color: var(--ember); color: var(--ember); }
+
+.adetail__list { margin-top: var(--s-4); }
+.adetail__list > div { padding-block: var(--s-3); }
+.adetail__list > div + div { border-top: 1px solid var(--line-dark); }
+.adetail__list dt {
+  font-size: var(--t-xs); font-weight: 800; color: var(--stone-dim);
+  letter-spacing: var(--track-label); text-transform: uppercase;
+}
+.adetail__list dd { margin-top: var(--s-1); font-size: var(--t-body); color: var(--foam); }
+
+.adetail__actions {
+  display: flex; flex-direction: column; gap: var(--s-2);
+  margin-top: var(--s-5); padding-top: var(--s-5);
+  border-top: 1px solid var(--line-dark);
+}
