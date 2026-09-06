@@ -4,6 +4,12 @@ One-page prezentace restaurace **Pohoda 2.0** — grill & pivnice, Strojírensk�
 Žďár nad Sázavou. Klikatelné demo pro prezentaci klientovi: statické HTML, CSS a JavaScript,
 žádný build, žádný backend.
 
+## Kde to běží
+
+Nasazeno na **https://restaurace-pohoda.vercel.app** — úvodní stránka,
+`/rezervace` a `/admin`. Nasazuje se z tohoto adresáře příkazem `vercel --prod`,
+repozitář na Vercel napojený není.
+
 ## Spuštění
 
 Stačí otevřít `index.html` v prohlížeči. Pokud chcete adresu na `localhost`
