@@ -1,0 +1,5 @@
+# Nástroje a dočasné výstupy
+.playwright-mcp/
+.claude/
+.DS_Store
+Thumbs.db

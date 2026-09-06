@@ -1,0 +1,89 @@
+/* =============================================================
+   POHODA 2.0 — Design tokens
+   Realizace Figma návrhu: střídání tmavých „grilových" pásů
+   a světlých krémových sekcí s tištěným jídelním lístkem.
+   ============================================================= */
+
+:root {
+  /* ---------- Tmavé plochy (hero, polední menu, patička) ---------- */
+  --coal:        #100f0d;   /* topbar, patička, nejhlubší plocha */
+  --char:        #1c1917;   /* hlavní tmavá plocha */
+  --ash:         #292524;   /* tmavé karty a tlačítka */
+  --ash-hi:      #332e2b;   /* hover na tmavé */
+  --line-dark:   #3a332e;   /* linky na tmavé */
+
+  /* ---------- Světlé plochy (příběh, lístek, rezervace) ---------- */
+  --cream:       #fff8f5;   /* krémový podklad sekcí */
+  --cream-warm:  #fdf3ee;   /* teplejší varianta pásu */
+  --card:        #ffffff;   /* bílé karty */
+  --line-light:  #ede4de;   /* linky na světlé */
+  --line-input:  #ddd2ca;   /* rámečky formulářových polí */
+
+  /* ---------- Oheň ---------- */
+  --ember:       #d97706;   /* primární akce, ceny, akcenty */
+  --ember-hi:    #ef8c0a;   /* hover */
+  --ember-deep:  #b45309;   /* stisk */
+  --flame:       #ea580c;   /* mikroakcent: nábor, žhavé */
+  --ember-tint:  #fdf1e3;   /* světlá výplň pod akcentem */
+
+  /* ---------- Text ---------- */
+  --foam:        #fffbeb;   /* text na tmavé */
+  --stone:       #b9b0aa;   /* sekundární na tmavé */
+  --stone-dim:   #8b8078;   /* meta na tmavé */
+  --ink:         #1c1917;   /* text na světlé */
+  --ink-soft:    #57534e;   /* popisy na světlé */
+  --ink-dim:     #8b8078;   /* meta na světlé */
+
+  /* ---------- Stavy ---------- */
+  --open:        #15803d;   /* dnes otevřeno */
+  --open-tint:   #e8f3ec;
+
+  /* ---------- Typografie ---------- */
+  --font-display: 'Vollkorn', Georgia, 'Times New Roman', serif;
+  --font-text:    'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Fluidní škála: mobil 360 px → desktop 1440 px.
+     Nad 1800 px roste přes html{font-size}, ne přes vw. */
+  --t-display: clamp(2.25rem, 1.35rem + 3.9vw, 3.5rem);
+  --t-h2:      clamp(1.75rem, 1.25rem + 2.1vw, 2.5rem);
+  --t-h3:      clamp(1.15rem, 1.05rem + 0.45vw, 1.375rem);
+  --t-h4:      1.0625rem;
+  --t-lead:    clamp(0.95rem, 0.9rem + 0.2vw, 1.0625rem);
+  --t-body:    0.9375rem;
+  --t-sm:      0.8125rem;
+  --t-xs:      0.6875rem;
+
+  --lh-tight:  1.14;
+  --lh-head:   1.25;
+  --lh-body:   1.62;
+  --track-label: 0.08em;   /* prostrkání verzálkových popisků */
+
+  /* ---------- Rozestupy ---------- */
+  --s-1: 0.25rem;  --s-2: 0.5rem;   --s-3: 0.75rem;  --s-4: 1rem;
+  --s-5: 1.5rem;   --s-6: 2rem;     --s-7: 3rem;     --s-8: 4rem;
+  --s-9: 6rem;     --s-10: 8rem;
+
+  /* ---------- Layout ---------- */
+  --page:   1280px;
+  --gutter: clamp(1rem, 0.35rem + 2.6vw, 3rem);
+  --nav-h:  80px;
+
+  /* ---------- Tvar: ostré rohy jsou identita podniku ---------- */
+  --radius: 0;
+
+  /* ---------- Hloubka ---------- */
+  --lift-1: 0 1px 2px rgba(28,25,23,0.04);
+  --lift-2: 0 8px 24px -4px rgba(28,25,23,0.08), 0 2px 6px -1px rgba(28,25,23,0.04);
+  --lift-3: 0 24px 60px -20px rgba(28,25,23,0.28);
+
+  /* ---------- Pohyb ---------- */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --fast: 140ms;
+  --mid:  260ms;
+  --slow: 520ms;
+}
+
+/* Velké obrazovky a televize: neroztahovat, zvětšit celý systém. */
+@media (min-width: 1800px) { html { font-size: 17.5px; } :root { --page: 1440px; } }
+@media (min-width: 2400px) { html { font-size: 21px;   } :root { --page: 1680px; } }
+@media (min-width: 3200px) { html { font-size: 27px;   } :root { --page: 2100px; } }

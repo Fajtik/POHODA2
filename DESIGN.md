@@ -234,3 +234,28 @@ The design uses a soft, deliberate `0.25rem` (4px) baseline radius for structura
 
 ### 5. Input Fields
 - Understated craft look: `#FFFFFF` fill with `1px solid #D6D3D1`. Focused: `1.5px solid #D97706` with no generic browser blue ring. Label positioned using `Space Grotesk` uppercase tracking.
+## Co platí v implementaci
+
+Tento dokument vznikl vedle první verze kódu a na třech místech se s ní rozcházel.
+Rozhodnutí pro demo (a tedy závazný stav) je následující:
+
+### Světlost sekcí
+Systém výše popisuje světlý parchment podklad. Implementace **střídá tmavé a světlé pásy**:
+úvod, polední menu a patička stojí na `#1c1917`, příběh restaurace, jídelní lístek
+a rezervace na krémovém `#fff8f5`. Kontrast mezi pásy nese rytmus stránky —
+tmavé bloky patří ohni a večeru, světlé čtení jídelního lístku.
+
+### Typografie
+Místo tří rodin používáme **dvě**: `Vollkorn` na nadpisy a názvy jídel, `Manrope`
+na všechno ostatní. `Space Grotesk` odpadá — číselné údaje (gramáže, ceny, otevírací doba)
+řeší Manrope přes `font-variant-numeric: tabular-nums`, což drží číslice v jednom sloupci
+bez další načítané rodiny.
+
+### Tvar
+Baseline radius je **0**, ne 4px — ostré rohy jsou identita podniku, dřevo a tištěný papír.
+Jedinou výjimkou jsou filtrační chipy jídelního lístku, které se pod 900 px mění
+na pilulky, protože fungují jako vodorovný pás k projetí prstem.
+
+### Tokeny
+Zdrojem pravdy pro barvy, typografickou škálu a rozestupy je `assets/css/tokens.css`.
+Hodnoty ve frontmatteru tohoto dokumentu jsou původní návrh, ne to, co se renderuje.

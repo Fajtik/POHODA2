@@ -1,0 +1,182 @@
+/* =============================================================
+   POHODA 2.0 — Responzivita
+   Mobil 360 px → tablet → desktop → velká obrazovka / televize.
+   Zlomy jsou tam, kde se layout skutečně láme, ne na kulatých
+   číslech zařízení.
+   ============================================================= */
+
+/* ---------------------------------------------------------------
+   ≤ 1140 px — navigace se nevejde vedle akcí: schová se pod tlačítko
+   --------------------------------------------------------------- */
+@media (max-width: 1140px) {
+  .nav__links {
+    position: absolute; left: 0; right: 0; top: 100%;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--cream);
+    border-bottom: 1px solid var(--line-light);
+    box-shadow: var(--lift-2);
+    padding: var(--s-2) var(--gutter) var(--s-4);
+    display: none;
+  }
+  .nav__links.is-open { display: flex; }
+  .nav__links a {
+    padding: var(--s-3) 0;
+    border-bottom: 1px solid var(--line-light);
+    font-size: var(--t-body);
+  }
+  .nav__links a:last-child { border-bottom: none; }
+  .nav__links a.is-current { border-bottom-color: var(--line-light); }
+
+  .nav__cta-mobile {
+    display: flex; align-items: center; justify-content: center; gap: var(--s-2);
+    margin-top: var(--s-3);
+    background: var(--ember); color: #17120b;
+    font-weight: 700;
+    padding: 0.875rem 1.375rem !important;
+    border-bottom: none !important;
+  }
+  .nav__cta-mobile:hover { background: var(--ember-hi); color: #17120b; }
+
+  .nav__inner { position: relative; justify-content: space-between; }
+  .nav__burger { display: inline-flex; }
+  .nav__phone { display: none; }
+  .brand { margin-right: auto; }
+}
+
+/* ---------------------------------------------------------------
+   ≤ 1024 px — dvousloupcové bloky se skládají pod sebe
+   --------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__content { order: 1; }
+  .hero__visual { order: 2; margin-bottom: var(--s-4); }
+  .hero__badge { left: var(--s-4); right: var(--s-4); }
+  .hero__strip {
+    grid-template-columns: 1fr;
+    gap: var(--s-3);
+    margin-top: var(--s-8);
+    padding: var(--s-4) var(--s-5);
+  }
+  .hero__strip > :nth-child(2),
+  .hero__strip > :nth-child(3) { justify-content: flex-start; }
+
+  .story__grid { grid-template-columns: 1fr; }
+  .story__text p { max-width: 62ch; }
+
+  .book__grid { grid-template-columns: 1fr; }
+
+  .lunch { grid-template-columns: 1fr; }
+  .lunch__cta { min-width: 0; }
+
+  .footer__grid { grid-template-columns: 1fr 1fr; }
+  .footer__brand { grid-column: 1 / -1; }
+}
+
+/* ---------------------------------------------------------------
+   ≤ 900 px — jídelní lístek do jednoho sloupce, filtry na šířku
+   --------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .menu__head { grid-template-columns: 1fr; align-items: start; }
+
+  /* Chipy se mění na vodorovný pás, kterým se dá projet prstem. */
+  .chips {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    padding-bottom: var(--s-2);
+  }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip { flex: none; border-radius: 999px; }
+
+  .menu__note { flex-wrap: wrap; }
+  .menu__note .btn { margin-left: 0; width: 100%; }
+}
+
+/* ---------------------------------------------------------------
+   ≤ 760 px — dvousloupcová mřížka jídel a specialit se rozpadá
+   --------------------------------------------------------------- */
+@media (max-width: 760px) {
+  .dishes { grid-template-columns: 1fr; }
+  .offer { grid-template-columns: 1fr; }
+}
+
+/* ---------------------------------------------------------------
+   ≤ 720 px — mobilní sazba
+   --------------------------------------------------------------- */
+@media (max-width: 720px) {
+  :root { --nav-h: 68px; }
+
+  .topbar__inner { flex-direction: column; align-items: flex-start; gap: var(--s-2); }
+  .topbar__right { flex-wrap: wrap; }
+
+  /* V liště zůstane jen volání a menu — CTA je uvnitř rozbaleného menu. */
+  .nav__actions .btn--ember,
+  .btn-icon { display: none; }
+  .nav__actions { gap: var(--s-2); }
+  .nav__phone {
+    display: inline-flex;
+    width: 44px; height: 44px;
+    align-items: center; justify-content: center;
+    border: 1px solid var(--line-input);
+    font-size: 1rem;
+  }
+  .nav__phone .label { display: none; }
+
+  .hero__facts { grid-template-columns: 1fr; }
+  .hero__fact + .hero__fact { border-left: none; border-top: 1px solid var(--line-dark); }
+
+  /* Plovoucí karta pod fotkou dává na mobilu čitelnější celek. */
+  .hero__badge {
+    position: static;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+    margin-top: 0;
+    box-shadow: none;
+  }
+  .hero__badge-time { margin-left: 0; width: 100%; }
+  .hero__visual { margin-bottom: 0; }
+
+  .stats { flex-direction: column; gap: var(--s-3); }
+  .stats > div + div {
+    border-left: none; padding-left: 0;
+    border-top: 1px solid var(--line-light); padding-top: var(--s-3);
+  }
+
+  .dish__top { flex-wrap: wrap; gap: var(--s-2); }
+  .dish__price { width: 100%; }
+
+  .form__row--2, .form__row--3 { grid-template-columns: 1fr; }
+  .form__foot { flex-direction: column; align-items: stretch; }
+  .form__foot .btn { width: 100%; }
+  .form__hint { max-width: none; }
+
+  .place__cta { grid-template-columns: 1fr; }
+
+  .footer__grid { grid-template-columns: 1fr; }
+  .footer__bottom { flex-direction: column; align-items: flex-start; }
+  .footer__bottom nav { flex-wrap: wrap; }
+}
+
+/* ---------------------------------------------------------------
+   ≤ 420 px — nejužší telefony
+   --------------------------------------------------------------- */
+@media (max-width: 420px) {
+  .hero__cta { flex-direction: column; align-items: stretch; width: 100%; }
+  .hero__cta .btn { width: 100%; }
+  .brand__sub { display: none; }
+}
+
+/* ---------------------------------------------------------------
+   Tisk — jídelní lístek na papír
+   --------------------------------------------------------------- */
+@media print {
+  .nav, .topbar, .hero__visual, .footer, .chips, .place__map,
+  .form, .lunch__cta, .menu__note .btn, .skip-link { display: none !important; }
+  body { background: #fff; color: #000; }
+  .section, .hero { padding-block: 1rem; background: #fff !important; color: #000 !important; }
+  .dishes { grid-template-columns: 1fr 1fr; }
+  .dish { border-color: #ccc; break-inside: avoid; }
+}
