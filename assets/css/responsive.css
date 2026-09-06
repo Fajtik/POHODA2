@@ -6,9 +6,9 @@
    ============================================================= */
 
 /* ---------------------------------------------------------------
-   ≤ 1140 px — navigace se nevejde vedle akcí: schová se pod tlačítko
+   ≤ 1320 px — navigace se nevejde vedle akcí: schová se pod tlačítko
    --------------------------------------------------------------- */
-@media (max-width: 1140px) {
+@media (max-width: 1320px) {
   .nav__links {
     position: absolute; left: 0; right: 0; top: 100%;
     flex-direction: column; align-items: stretch; gap: 0;
@@ -36,6 +36,8 @@
     border-bottom: none !important;
   }
   .nav__cta-mobile:hover { background: var(--ember-hi); color: #17120b; }
+
+  .nav__panel { justify-content: space-between; }
 
   .nav__inner { position: relative; justify-content: space-between; }
   .nav__burger { display: inline-flex; }
@@ -154,6 +156,10 @@
   .form__hint { max-width: none; }
 
   .place__cta { grid-template-columns: 1fr; }
+
+  .cta-rezervace { flex-wrap: wrap; }
+  .cta-rezervace__text { flex-basis: calc(100% - 46px - var(--s-4)); }
+  .cta-rezervace__btn { width: 100%; justify-content: center; }
 
   .footer__grid { grid-template-columns: 1fr; }
   .footer__bottom { flex-direction: column; align-items: flex-start; }

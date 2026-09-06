@@ -193,6 +193,7 @@ h1, h2, h3, h4 {
 .nav__links { display: flex; align-items: center; gap: clamp(0.75rem, 1.4vw, 1.5rem); margin-inline: auto; }
 .nav__links a {
   font-size: var(--t-sm); font-weight: 600; color: var(--ink);
+  white-space: nowrap;
   padding-block: var(--s-2);
   border-bottom: 2px solid transparent;
   transition: color var(--fast) var(--ease), border-color var(--fast) var(--ease);
@@ -448,6 +449,10 @@ h1, h2, h3, h4 {
   letter-spacing: var(--track-label); text-transform: uppercase;
 }
 .field > label .req { color: var(--flame); }
+.field > label .volitelne {
+  font-weight: 500; text-transform: none; letter-spacing: 0;
+  color: var(--ink-dim);
+}
 .field input, .field select, .field textarea {
   width: 100%;
   background: var(--card); color: var(--ink);
@@ -477,7 +482,8 @@ h1, h2, h3, h4 {
   border-top: 1px solid var(--line-light); padding-top: var(--s-5);
 }
 .form__hint { display: flex; align-items: flex-start; gap: var(--s-2); font-size: var(--t-sm); color: var(--ink-soft); max-width: 34ch; }
-.form__hint i { color: var(--ember); margin-top: 4px; }
+.form__hint i { color: var(--ember); margin-top: 4px; flex: none; }
+.form__hint a { color: var(--ember-deep); font-weight: 700; }
 
 .badge-open {
   display: inline-flex; align-items: center; gap: var(--s-2);
@@ -619,13 +625,46 @@ h1, h2, h3, h4 {
 }
 .badge-open.is-closed .dot { background: var(--ink-dim); }
 
-/* Přemostění mezi rychlým formulářem a plánem sálu na samostatné stránce. */
-.form__alt {
-  display: flex; align-items: flex-start; gap: var(--s-3);
-  margin-top: var(--s-5); padding: var(--s-4);
-  background: var(--ember-tint); border: 1px solid rgba(217,119,6,0.3);
-  font-size: var(--t-sm); color: var(--ink-soft);
+/* Rezervace se dělá jen v rezervačním systému — odkaz na něj musí být
+   nepřehlédnutelný, aby host nehledal formulář, který tu není. */
+.cta-rezervace {
+  display: flex; align-items: center; gap: var(--s-4);
+  margin-top: var(--s-5); padding: var(--s-4) var(--s-5);
+  background: var(--ink); color: var(--cream);
+  border: 1px solid var(--ink);
+  transition: background-color var(--fast) var(--ease);
 }
-.form__alt i { color: var(--ember); margin-top: 4px; flex: none; }
-.form__alt a { color: var(--ember-deep); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
-.form__alt a:hover { color: var(--ember); }
+.cta-rezervace:hover { background: var(--ash); }
+
+.cta-rezervace__icon {
+  width: 46px; height: 46px; flex: none;
+  display: grid; place-items: center;
+  background: var(--ember); color: #17120b; font-size: 1.15rem;
+}
+.cta-rezervace__text { flex: 1; font-size: var(--t-sm); color: var(--stone); line-height: 1.5; }
+.cta-rezervace__text strong {
+  display: block; margin-bottom: 2px;
+  font-family: var(--font-display); font-size: var(--t-h4); font-weight: 600;
+  color: var(--foam);
+}
+.cta-rezervace__btn {
+  flex: none;
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  padding: 0.75rem 1.125rem;
+  background: var(--ember); color: #17120b;
+  font-size: var(--t-sm); font-weight: 700;
+  transition: background-color var(--fast) var(--ease), transform var(--fast) var(--ease);
+}
+.cta-rezervace:hover .cta-rezervace__btn { background: var(--ember-hi); }
+.cta-rezervace:hover .cta-rezervace__btn i { transform: translateX(3px); }
+.cta-rezervace__btn i { transition: transform var(--fast) var(--ease); }
+
+/* Provozní panel v navigaci — je to ukázka pro klienta, ne stránka pro hosty. */
+.nav__panel { display: inline-flex; align-items: center; gap: var(--s-2); }
+.tag-demo {
+  padding: 2px var(--s-2);
+  background: var(--ink); color: var(--ember);
+  font-size: 0.625rem; font-weight: 800;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.nav__panel:hover .tag-demo { background: var(--ember); color: #17120b; }

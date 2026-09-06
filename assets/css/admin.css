@@ -149,26 +149,36 @@
 .trow__label span { font-size: 0.625rem; color: var(--stone-dim); }
 
 .trow__track {
-  position: relative; flex: 1; min-height: 40px;
+  position: relative; flex: 1; min-height: 52px;
   background: var(--coal);
   background-image: repeating-linear-gradient(to right,
     var(--line-dark) 0 1px, transparent 1px calc(100% / 6));
 }
 
 .tblock {
-  position: absolute; top: 3px; bottom: 3px;
+  position: absolute; top: 4px; bottom: 4px;
   display: flex; flex-direction: column; justify-content: center;
-  gap: 1px; padding: 0 var(--s-2);
+  gap: 2px; padding: 0 6px;
   overflow: hidden; text-align: left;
   border-left: 3px solid;
   transition: filter var(--fast) var(--ease);
 }
 .tblock:hover { filter: brightness(1.25); }
+
+/* Obě řádky mají pevnou výšku, aby se do bloku vždy vešly celé. */
 .tblock__name {
-  font-size: var(--t-xs); font-weight: 700; color: var(--foam);
+  font-size: 0.75rem; font-weight: 700; line-height: 1.25; color: var(--foam);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.tblock__meta { font-size: 0.625rem; color: var(--stone); font-variant-numeric: tabular-nums; }
+.tblock__meta {
+  font-size: 0.6875rem; line-height: 1.2; color: var(--stone);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Krátké sezení nemá na jméno místo — necháme v něm jen čas a počet. */
+.tblock--uzky .tblock__name { display: none; }
+.tblock--uzky .tblock__meta { font-size: 0.75rem; font-weight: 700; color: var(--foam); }
 
 .tblock.is-ceka       { background: rgba(224,163,38,0.2);  border-left-color: var(--st-ceka); }
 .tblock.is-potvrzeno  { background: rgba(107,156,101,0.2); border-left-color: var(--st-potvrzeno); }

@@ -139,13 +139,18 @@
   }
 
   function blokRezervace(r) {
+    var podil = (r.konec - r.zacatek) / ROZSAH;
+    var uzky = podil < 0.115;                     // kratší než ~83 minut
+
     var blok = document.createElement('button');
     blok.type = 'button';
-    blok.className = 'tblock is-' + r.stav;
+    blok.className = 'tblock is-' + r.stav + (uzky ? ' tblock--uzky' : '');
     blok.dataset.rezervace = r.id;
     blok.style.left = ((r.zacatek - OSA_OD) / ROZSAH * 100) + '%';
-    blok.style.width = ((r.konec - r.zacatek) / ROZSAH * 100) + '%';
-    blok.title = r.cas + ' · ' + r.host + ' · ' + P.sklonujOsoby(r.osob) + ' · ' + STAVY[r.stav].dlouze;
+    blok.style.width = (podil * 100) + '%';
+    blok.title = r.host + ' · ' + r.cas + '–' + P.naCas(r.konec) + ' · ' +
+                 P.sklonujOsoby(r.osob) + ' · ' + STAVY[r.stav].dlouze;
+    blok.setAttribute('aria-label', blok.title);
 
     var jmeno = document.createElement('span');
     jmeno.className = 'tblock__name';

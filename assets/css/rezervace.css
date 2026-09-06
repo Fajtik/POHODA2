@@ -322,10 +322,6 @@
 /* ---------------------------------------------------------------
    8. KONTAKTNÍ KROK
    --------------------------------------------------------------- */
-.volitelne {
-  font-weight: 500; text-transform: none; letter-spacing: 0;
-  color: var(--ink-dim);
-}
 .occasion { margin-top: var(--s-2); border: none; }
 .occasion__row { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-3); }
 .tagbtn {

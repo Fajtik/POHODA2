@@ -150,44 +150,34 @@
   /* -----------------------------------------------------------
      Rezervační formulář — demo bez backendu
      ----------------------------------------------------------- */
-  /* Krátký formulář na úvodní stránce. Čtyřkrokový flow na rezervace.html
-     má vlastní skript a tenhle se ho nedotýká. */
-  (function rychlaRezervace() {
-    var form = $('#formular-rychla-rezervace');
+  /* Kontaktní formulář na úvodní stránce. Rezervace stolu se dělá výhradně
+     přes rezervace.html, tenhle formulář slouží jen k dotazům. */
+  (function kontaktniFormular() {
+    var form = $('#formular-zprava');
     if (!form) return;
 
-    /* Předvyplníme zítřejší datum, ať je formulář hned použitelný. */
-    var datum = $('#datum', form);
-    if (datum) {
-      var zitra = new Date();
-      zitra.setDate(zitra.getDate() + 1);
-      datum.value = zitra.toISOString().slice(0, 10);
-      datum.min = new Date().toISOString().slice(0, 10);
-    }
-
-    var stav = $('#stav-rychle-rezervace');
+    var stav = $('#stav-zpravy');
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      var jmeno   = $('#jmeno', form);
-      var telefon = $('#telefon', form);
+      var jmeno  = $('#jmeno', form);
+      var email  = $('#email', form);
+      var zprava = $('#zprava', form);
 
-      if (!jmeno.value.trim() || !telefon.value.trim()) {
-        zobrazit('Vyplňte prosím jméno a telefonní číslo — bez nich rezervaci nepotvrdíme.', 'chyba');
-        (!jmeno.value.trim() ? jmeno : telefon).focus();
+      var chybi = !jmeno.value.trim() ? jmeno
+                : !email.value.trim() ? email
+                : !zprava.value.trim() ? zprava : null;
+
+      if (chybi) {
+        zobrazit('Doplňte prosím jméno, e-mail a text zprávy, ať víme, komu a na co odpovědět.', 'chyba');
+        chybi.focus();
         return;
       }
 
-      var osob = $('#osob', form).value;
-      var cas  = $('#cas', form).value;
-      var den  = new Date($('#datum', form).value)
-        .toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long' });
-
-      zobrazit('Rezervace přijata: ' + osob + ', ' + den + ' v ' + cas +
-               '. Potvrzení pošleme SMS na ' + telefon.value.trim() + '.', 'ok');
+      zobrazit('Zpráva odeslána. Ozveme se na ' + email.value.trim() +
+               ', obvykle do druhého dne.', 'ok');
       form.reset();
-      if (datum) datum.value = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
     });
 
     function zobrazit(text, typ) {

@@ -45,8 +45,9 @@
       <a href="#jidelni-listek">Jídelní lístek</a>
       <a href="#speciality">Speciality z grilu</a>
       <a href="#o-nas">O nás</a>
-      <a href="#rezervace">Rezervace</a>
+      <a href="rezervace.html">Rezervace</a>
       <a href="#kontakt">Kontakt</a>
+      <a href="admin.html" class="nav__panel">Provozní panel <span class="tag-demo">demo</span></a>
       <a href="rezervace.html" class="nav__cta-mobile"><i class="fa-solid fa-utensils" aria-hidden="true"></i> Rezervovat stůl</a>
     </nav>
 
@@ -329,7 +330,7 @@
         <h3>Máme pro vás také polévky, saláty a dětská menu</h3>
         <p>Každý den pro vás připravujeme čerstvý tažený vývar a vegetariánské speciále s Gran Moravia.</p>
       </div>
-      <a href="rezervace.html" class="btn btn--ink">Objednat nebo rezervovat</a>
+      <a href="rezervace.html" class="btn btn--ink">Rezervovat stůl</a>
     </div>
 
   </div>
@@ -362,72 +363,68 @@
 <!-- ============================================================
      REZERVACE + PROVOZNÍ INFORMACE
      ============================================================ -->
-<section class="section section--warm" id="rezervace">
+<section class="section section--warm" id="napiste-nam">
   <div class="wrap book__grid">
 
     <div class="panel">
-      <p class="eyebrow"><i class="fa-regular fa-calendar-check" aria-hidden="true"></i> Stůl pro vás</p>
-      <h2 class="h-section" style="margin-top:var(--s-3)">Rezervace stolu</h2>
-      <p class="lead" style="margin-top:var(--s-3)">Plánujete rodinnou oslavu, posezení s přáteli nebo firemní večeři? Vyplňte formulář níže, rezervaci vám potvrdíme formou SMS nebo telefonicky.</p>
+      <p class="eyebrow"><i class="fa-regular fa-message" aria-hidden="true"></i> Napište nám</p>
+      <h2 class="h-section" style="margin-top:var(--s-3)">Máte dotaz nebo chystáte akci?</h2>
+      <p class="lead" style="margin-top:var(--s-3)">Ozvěte se ohledně firemní večeře, svatby, rautu nebo čehokoliv, co potřebujete domluvit dopředu. Odpovídáme do druhého dne.</p>
 
-      <form class="form" id="formular-rychla-rezervace" novalidate>
+      <!-- Rezervace stolu má vlastní systém, formulář níže slouží jen k dotazům. -->
+      <a class="cta-rezervace" href="rezervace.html">
+        <span class="cta-rezervace__icon" aria-hidden="true"><i class="fa-solid fa-chair"></i></span>
+        <span class="cta-rezervace__text">
+          <strong>Chcete rezervovat stůl?</strong>
+          Rezervace vyřizujeme výhradně přes rezervační systém — vyberete si datum, čas i konkrétní stůl v plánu sálu.
+        </span>
+        <span class="cta-rezervace__btn">Rezervovat stůl <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+      </a>
+
+      <form class="form" id="formular-zprava" novalidate>
         <div class="form__row form__row--2">
           <p class="field">
             <label for="jmeno">Jméno a příjmení <span class="req" aria-hidden="true">*</span></label>
             <input type="text" id="jmeno" name="jmeno" placeholder="Jan Novák" autocomplete="name" required>
           </p>
           <p class="field">
-            <label for="telefon">Telefonní číslo <span class="req" aria-hidden="true">*</span></label>
-            <input type="tel" id="telefon" name="telefon" placeholder="+420 777 000 000" autocomplete="tel" required>
+            <label for="email">E-mail <span class="req" aria-hidden="true">*</span></label>
+            <input type="email" id="email" name="email" placeholder="vas@email.cz" autocomplete="email" required>
           </p>
         </div>
 
-        <div class="form__row form__row--3">
-          <p class="field field--select">
-            <label for="osob">Počet osob <span class="req" aria-hidden="true">*</span></label>
-            <select id="osob" name="osob" required>
-              <option>2 osoby</option>
-              <option>3 osoby</option>
-              <option selected>4 osoby</option>
-              <option>5 osob</option>
-              <option>6 osob</option>
-              <option>7 a více osob</option>
-            </select>
-          </p>
+        <div class="form__row form__row--2">
           <p class="field">
-            <label for="datum">Datum <span class="req" aria-hidden="true">*</span></label>
-            <input type="date" id="datum" name="datum" required>
+            <label for="telefon">Telefon <span class="volitelne">(nepovinné)</span></label>
+            <input type="tel" id="telefon" name="telefon" placeholder="+420 777 000 000" autocomplete="tel">
           </p>
           <p class="field field--select">
-            <label for="cas">Čas příchodu <span class="req" aria-hidden="true">*</span></label>
-            <select id="cas" name="cas" required>
-              <option>11:30</option><option>12:00</option><option>17:00</option>
-              <option selected>18:00</option><option>18:30</option>
-              <option>19:00</option><option>19:30</option><option>20:00</option>
+            <label for="tema">Čeho se dotaz týká <span class="req" aria-hidden="true">*</span></label>
+            <select id="tema" name="tema" required>
+              <option>Firemní akce nebo školení</option>
+              <option>Oslava, svatba nebo raut</option>
+              <option>Dotaz k jídelnímu lístku a alergenům</option>
+              <option>Nabídka spolupráce</option>
+              <option>Něco jiného</option>
             </select>
           </p>
         </div>
 
         <p class="field">
-          <label for="poznamka">Poznámka / zvláštní přání</label>
-          <textarea id="poznamka" name="poznamka" placeholder="Např. dětská židlička, tiché místo u okna, zájem o Tomahawk steak…"></textarea>
+          <label for="zprava">Vaše zpráva <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="zprava" name="zprava" placeholder="Např. chystáme firemní večeři pro 20 lidí v půlce října, zajímá nás salonek a možnosti menu." required></textarea>
         </p>
 
         <div class="form__foot">
           <p class="form__hint">
             <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
-            Rezervace pro tentýž den vyřizujeme také přímo po telefonu.
+            <span>Spěchá to? Zavolejte na <a href="tel:+420566620120">566 620 120</a>, jsme na příjmu po celou otevírací dobu.</span>
           </p>
-          <button type="submit" class="btn btn--ember">Odeslat rezervaci <i class="fa-regular fa-circle-check" aria-hidden="true"></i></button>
+          <button type="submit" class="btn btn--ember">Odeslat zprávu <i class="fa-regular fa-paper-plane" aria-hidden="true"></i></button>
         </div>
 
-        <p class="form__status" id="stav-rychle-rezervace" role="status" hidden></p>
+        <p class="form__status" id="stav-zpravy" role="status" hidden></p>
       </form>
-
-      <p class="form__alt">
-        <i class="fa-solid fa-chair" aria-hidden="true"></i>
-        <span>Chcete si vybrat konkrétní stůl? <a href="rezervace.html">Otevřete plán sálu a zahrádky</a> a uvidíte, co je na váš termín volné.</span>
-      </p>
     </div>
 
     <div>
@@ -528,7 +525,7 @@
       <p>© 2026 Restaurace Pohoda 2.0, Žďár nad Sázavou</p>
       <nav aria-label="Doplňkové odkazy">
         <a href="#jidelni-listek">Jídelní lístek</a>
-        <a href="#rezervace">Rezervace</a>
+        <a href="rezervace.html">Rezervace</a>
         <a href="#kontakt">Kontakt</a>
         <a href="admin.html">Provozní panel</a>
       </nav>

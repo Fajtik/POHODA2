@@ -61,7 +61,11 @@ ke klientovi, patří ověřit se skutečnou dispozicí.
 ## Průchod demem
 
 **Úvodní stránka:** Úvod → Příběh restaurace a speciality → Výběr z jídelního lístku
-s filtrem → Polední meníčka → Rychlá rezervace a provozní informace → Patička s kontakty.
+s filtrem → Polední meníčka → Kontaktní formulář a provozní informace → Patička s kontakty.
+
+Rezervace stolu se dělá **výhradně přes rezervační systém** (`/rezervace`). Formulář na
+úvodní stránce slouží jen k dotazům na firemní akce, oslavy a podobně — mít rezervování
+na dvou místech dvěma způsoby by hosty jen mátlo.
 
 **Rezervace:** Termín a počet osob → Čas → Stůl v plánu sálu nebo zahrádky → Kontakt →
 Potvrzení s číslem rezervace.
